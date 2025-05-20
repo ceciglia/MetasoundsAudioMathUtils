@@ -17,7 +17,7 @@ namespace Metasound
 		METASOUND_PARAM(OutParamNameAudio, "Out", "Audio output.");
 	} // namespace ClickNodeVertexNames
 
-	FClickNodeOperator::FClickNodeOperator(const FOperatorSettings& InSettings, const FCreateOperatorParams& InParams, const FTriggerReadRef& InTriggerIn)
+	FClickNodeOperator::FClickNodeOperator(const FOperatorSettings& InSettings, const FBuildOperatorParams& InParams, const FTriggerReadRef& InTriggerIn)
 		: SampleRate(InSettings.GetSampleRate())
 		, TriggerIn(InTriggerIn)
 		, AudioOutput(FAudioBufferWriteRef::CreateNew(InSettings))
@@ -57,13 +57,13 @@ namespace Metasound
 		);
 	}
 
-	TUniquePtr<IOperator> FClickNodeOperator::CreateOperator(const FCreateOperatorParams& InParams, FBuildErrorArray& OutErrors)
+	TUniquePtr<IOperator> FClickNodeOperator::CreateOperator(const FBuildOperatorParams& InParams, FBuildResults& OutErrors)
 	{
 		using namespace ClickNode;
 
 		const FInputVertexInterface& InputInterface = GetVertexInterface().GetInputInterface();
 
-		FTriggerReadRef TriggerIn = InParams.InputDataReferences.GetDataReadReferenceOrConstruct<FTrigger>(METASOUND_GET_PARAM_NAME(InputInClickNode), InParams.OperatorSettings);
+		FTriggerReadRef TriggerIn = InParams.InputData.ToDataReferenceCollection().GetDataReadReferenceOrConstruct<FTrigger>(METASOUND_GET_PARAM_NAME(InputInClickNode), InParams.OperatorSettings);
 
 		return MakeUnique<FClickNodeOperator>(InParams.OperatorSettings, InParams, TriggerIn);
 	}

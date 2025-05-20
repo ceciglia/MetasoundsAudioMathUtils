@@ -79,11 +79,11 @@ namespace Metasound
 		return Interface;
 	}
 
-	TUniquePtr<IOperator> FSineOperator::CreateOperator(const FCreateOperatorParams& InParams, FBuildErrorArray& OutErrors)
+	TUniquePtr<IOperator> FSineOperator::CreateOperator(const FBuildOperatorParams& InParams, FBuildResults& OutErrors)
 	{
 		using namespace SineNode;
 
-		const FDataReferenceCollection& InputCollection = InParams.InputDataReferences;
+		const FDataReferenceCollection& InputCollection = InParams.InputData.ToDataReferenceCollection();
 		const FInputVertexInterface& InputInterface = GetVertexInterface().GetInputInterface();
 
 		FAudioBufferReadRef AudioIn = InputCollection.GetDataReadReferenceOrConstruct<FAudioBuffer>(METASOUND_GET_PARAM_NAME(InParamNameAudioInput), InParams.OperatorSettings);

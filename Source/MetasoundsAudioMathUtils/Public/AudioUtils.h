@@ -25,71 +25,72 @@ namespace DSPProcessing
 	//	0.0055295 -0.0052291, 0.000915266, 0.00390557f, -0.00549833f, 0.00277942f, 0.00196776f, -0.0049956f, 
 	//	0.0040394f, 0.0f };
 
-class FAudioDivide
-{
-public:
-	void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* InputGateToggle, const int32 InNumSamples);
-};
+	class FAudioDivide
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* InputGateToggle, const int32 InNumSamples);
+	};
 
-class FCos
-{
-public:
-	void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const int32 InNumSamples);
-};
+	class FCos
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const int32 InNumSamples);
+	};
 
-class FGate
-{
-public:
-	void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* InputGateToggle, const int32 InNumSamples);
-};
+	class FGate
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* InputGateToggle, const int32 InNumSamples);
+	};
 
-class FPow
-{
-public:
-	void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* InputPowerOf, const int32 InNumSamples);
-};
+	class FPow
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* InputPowerOf, const int32 InNumSamples);
+	};
 
-class FOnePoleIIR
-{
-public:
-	void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* coefA, const float* coefB, const int32 InNumSamples);
-private:
-	float mPreviousSample = 0.0f;
-};
+	class FOnePoleIIR
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* coefA, const float* coefB, const int32 InNumSamples);
+	private:
+		float mPreviousSample = 0.0f;
+	};
 
-class FOnePoleFIR
-{
-public:
-	void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* coefA, const float* coefB, const int32 InNumSamples);
-private:
-	float mPreviousInputSample = 0.0f;
-};
+	class FOnePoleFIR
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* coefA, const float* coefB, const int32 InNumSamples);
+	private:
+		float mPreviousInputSample = 0.0f;
+	};
 
-class FSamphold
-{
-public:
-	void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* InputSampholdPhasor, const int32 InNumSamples);
-private:
-	float mHeldSample = 0.0f;
-	float mPreviousPhasorValue = 0.0f;
-};
+	class FSamphold
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const float* InputSampholdPhasor, const int32 InNumSamples);
+	private:
+		float mHeldSample = 0.0f;
+		float mPreviousPhasorValue = 0.0f;
+	};
 
-class FSine
-{
-public:
-	void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const int32 InNumSamples);
-};
+	class FSine
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const int32 InNumSamples);
+	};
 
-class FSqrt
-{
-public:
-	void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const int32 InNumSamples);
-};
+	class FSqrt
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const int32 InNumSamples);
+	};
 
-class FWrap
-{
-public:
-	void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const int32 InNumSamples);
-};
+	class FWrap
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const int32 InNumSamples);
+	};
 
 } // namespace DSPProcessing
+

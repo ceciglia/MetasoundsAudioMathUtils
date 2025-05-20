@@ -36,7 +36,7 @@ class FCompareOperator : public TExecutableOperator<FCompareOperator>
 public:
 	static const FNodeClassMetadata& GetNodeInfo();
 	static const FVertexInterface& GetVertexInterface();
-	static TUniquePtr<IOperator> CreateOperator(const FCreateOperatorParams& InParams, FBuildErrorArray& OutErrors);
+	static TUniquePtr<IOperator> CreateOperator(const FBuildOperatorParams& InParams, FBuildResults& OutErrors);
 
 	FCompareOperator(const FOperatorSettings& InSettings, const FAudioBufferReadRef& InAudioInput, const FAudioBufferReadRef& InCompareComparator, FEnumAudioCompareTypeReadRef& InComparisonTypeReadRef);
 

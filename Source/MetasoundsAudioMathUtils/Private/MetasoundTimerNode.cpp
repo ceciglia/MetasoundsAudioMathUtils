@@ -14,7 +14,7 @@ METASOUND_PARAM(InputInTimerNode, "In", "Input trigger which outputs time since 
 METASOUND_PARAM(OutputTimeOnTrigger, "Out", "The time between triggers.");
 } // namespace TimerNodeVertexNames
 
-FTimerNodeOperator::FTimerNodeOperator(const FOperatorSettings& InSettings, const FCreateOperatorParams& InParams, const FTriggerReadRef& InTriggerIn)
+FTimerNodeOperator::FTimerNodeOperator(const FOperatorSettings& InSettings, const FBuildOperatorParams& InParams, const FTriggerReadRef& InTriggerIn)
 	: SampleRate(InSettings.GetSampleRate())
 	, TriggerIn(InTriggerIn)
 	, mTimeSeconds(TDataWriteReferenceFactory<FTime>::CreateExplicitArgs(InParams.OperatorSettings))
@@ -69,13 +69,13 @@ void FTimerNodeOperator::Execute()
 	);
 }
 
-TUniquePtr<IOperator> FTimerNodeOperator::CreateOperator(const FCreateOperatorParams& InParams, FBuildErrorArray& OutErrors)
+TUniquePtr<IOperator> FTimerNodeOperator::CreateOperator(const FBuildOperatorParams& InParams, FBuildResults& OutErrors)
 {
 	using namespace TimerNode;
 
 	const FInputVertexInterface& InputInterface = GetVertexInterface().GetInputInterface();
 
-	FTriggerReadRef TriggerIn = InParams.InputDataReferences.GetDataReadReferenceOrConstruct<FTrigger>(METASOUND_GET_PARAM_NAME(InputInTimerNode), InParams.OperatorSettings);
+	FTriggerReadRef TriggerIn = InParams.InputData.ToDataReferenceCollection().GetDataReadReferenceOrConstruct<FTrigger>(METASOUND_GET_PARAM_NAME(InputInTimerNode), InParams.OperatorSettings);
 
 	return MakeUnique<FTimerNodeOperator>(InParams.OperatorSettings, InParams, TriggerIn);
 }

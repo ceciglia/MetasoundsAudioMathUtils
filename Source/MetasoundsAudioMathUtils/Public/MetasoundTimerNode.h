@@ -25,9 +25,9 @@ class FTimerNodeOperator : public TExecutableOperator<FTimerNodeOperator>
 public:
 	static const FNodeClassMetadata& GetNodeInfo();
 	static const FVertexInterface& GetVertexInterface();
-	static TUniquePtr<IOperator> CreateOperator(const FCreateOperatorParams& InParams, FBuildErrorArray& OutErrors);
+	static TUniquePtr<IOperator> CreateOperator(const FBuildOperatorParams& InParams, FBuildResults& OutErrors);
 
-	FTimerNodeOperator(const FOperatorSettings& InSettings, const FCreateOperatorParams& InParams, const FTriggerReadRef& InTriggerIn);
+	FTimerNodeOperator(const FOperatorSettings& InSettings, const FBuildOperatorParams& InParams, const FTriggerReadRef& InTriggerIn);
 
 	virtual void BindInputs(FInputVertexInterfaceData& InOutVertexData) override;
 	virtual void BindOutputs(FOutputVertexInterfaceData& InOutVertexData) override;
