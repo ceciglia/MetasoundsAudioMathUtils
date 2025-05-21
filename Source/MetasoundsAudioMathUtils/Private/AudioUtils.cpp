@@ -123,4 +123,19 @@ namespace DSPProcessing
 		}
 	}
 
+	void FPhasor::PrepareToPlay(int32 sampleRate) {
+		ramp.Init(sampleRate);
+	}
+
+	void FPhasor::ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, int32 sampleRate, const int32 InNumSamples)
+	{
+		for (int32 Index = 0; Index < InNumSamples; ++Index)
+		{
+			currentFreq = InBuffer[Index];
+			deltaTime = sampleRate / currentFreq;
+			ramp.SetValueRange(0.0f, 1.0f, deltaTime);
+			OutBuffer[Index] = currentFreq < 0.0f ? FMath::Abs(ramp.GetNextValue() - 1.0f) : ramp.GetNextValue();
+		}
+	}
+
 } // namespace DSPProcessing

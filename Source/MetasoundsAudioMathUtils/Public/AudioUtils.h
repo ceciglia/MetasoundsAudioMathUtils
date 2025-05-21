@@ -92,5 +92,17 @@ namespace DSPProcessing
 		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, const int32 InNumSamples);
 	};
 
+	class FPhasor
+	{
+	public:
+		void ProcessAudioBuffer(const float* InBuffer, float* OutBuffer, int32 sampleRate, const int32 InNumSamples);
+		void PrepareToPlay(int32 sampleRate);
+
+	private:
+		Audio::FLinearEase ramp;
+		float currentFreq = 0.0f;
+		float deltaTime = 0.0f;
+	};
+
 } // namespace DSPProcessing
 
