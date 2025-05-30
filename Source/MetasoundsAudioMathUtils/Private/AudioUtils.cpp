@@ -134,7 +134,7 @@ namespace DSPProcessing
 			currentFreq = InBuffer[Index];
 			deltaTime = sampleRate / currentFreq;
 			ramp.SetValueRange(0.0f, 1.0f, deltaTime);
-			OutBuffer[Index] = currentFreq < 0.0f ? FMath::Abs(ramp.GetNextValue() - 1.0f) : ramp.GetNextValue();
+			OutBuffer[Index] = currentFreq < 0.0f ? (1.0f - ramp.GetNextValue()) : ramp.GetNextValue();
 		}
 	}
 
